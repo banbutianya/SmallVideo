@@ -1,0 +1,45 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 25
+    buildToolsVersion "27.0.0"
+    defaultConfig {
+        applicationId "com.example.a10953.smallvideo"
+        minSdkVersion 22
+        targetSdkVersion 25
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+        ndk {
+            abiFilters "armeabi", "armeabi-v7a"
+        }
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile 'com.android.support:appcompat-v7:25.3.1'
+
+    compile(name: 'volley-1.0.0', ext: 'aar')
+    compile(name: 'LiteAVSDK_UGC', ext: 'aar')
+
+    compile 'com.android.support:recyclerview-v7:25.3.1'
+
+    compile 'com.github.bumptech.glide:glide:3.7.0'
+    compile 'com.android.support:appcompat-v7:25.3.1'
+    compile files('libs/cos-sdk-android.1.4.3.11.jar')
+    compile files('libs/okhttp-3.2.0.jar')
+    compile files('libs/sha1utils.jar')
+    compile files('libs/okio-1.6.0.jar')
+
+    testCompile 'junit:junit:4.12'
+
+}
