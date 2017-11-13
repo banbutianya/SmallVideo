@@ -135,38 +135,6 @@ public class TCVideoSettingActivity extends AppCompatActivity implements View.On
         llBack.setOnClickListener(this);
         btnOK.setOnClickListener(this);
 
-//        etBitrate.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-//            @Override
-//            public void onFocusChange(View view, boolean hasFocus) {
-//                if(hasFocus){
-//                    rlBiterate.setBackgroundResource(R.drawable.rect_bg_green);
-//                }else{
-//                    rlBiterate.setBackgroundResource(R.drawable.rect_bg_gray);
-//                }
-//            }
-//        });
-//
-//        etFps.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-//            @Override
-//            public void onFocusChange(View view, boolean hasFocus) {
-//                if(hasFocus){
-//                    rlFps.setBackgroundResource(R.drawable.rect_bg_green);
-//                }else{
-//                    rlFps.setBackgroundResource(R.drawable.rect_bg_gray);
-//                }
-//            }
-//        });
-//
-//        etGop.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-//            @Override
-//            public void onFocusChange(View view, boolean hasFocus) {
-//                if(hasFocus){
-//                    rlGop.setBackgroundResource(R.drawable.rect_bg_green);
-//                }else{
-//                    rlGop.setBackgroundResource(R.drawable.rect_bg_gray);
-//                }
-//            }
-//        });
 
         rgVideoAspectRatio.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override

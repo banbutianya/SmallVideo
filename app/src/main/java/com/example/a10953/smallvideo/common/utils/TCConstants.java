@@ -28,12 +28,12 @@ public class TCConstants {
     public static final String ERROR_MSG_NET_DISCONNECTED    = "网络异常，请检查网络";
 
     // UGCEditer
-    public static final String ACTION_UGC_SINGLE_CHOOSE  = "com.tencent.qcloud.xiaozhibo.single";
-    public static final String ACTION_UGC_MULTI_CHOOSE   = "com.tencent.qcloud.xiaozhibo.multi";
-
-    public static final String INTENT_KEY_SINGLE_CHOOSE  = "single_video";
-    public static final String INTENT_KEY_MULTI_CHOOSE   = "multi_video";
-
-    public static final String DEFAULT_MEDIA_PACK_FOLDER = "txrtmp";      // UGC编辑器输出目录
-    public static final int THUMB_COUNT = 10;
+//    public static final String ACTION_UGC_SINGLE_CHOOSE  = "com.tencent.qcloud.xiaozhibo.single";
+//    public static final String ACTION_UGC_MULTI_CHOOSE   = "com.tencent.qcloud.xiaozhibo.multi";
+//
+//    public static final String INTENT_KEY_SINGLE_CHOOSE  = "single_video";
+//    public static final String INTENT_KEY_MULTI_CHOOSE   = "multi_video";
+//
+//    public static final String DEFAULT_MEDIA_PACK_FOLDER = "txrtmp";      // UGC编辑器输出目录
+//    public static final int THUMB_COUNT = 10;
 }

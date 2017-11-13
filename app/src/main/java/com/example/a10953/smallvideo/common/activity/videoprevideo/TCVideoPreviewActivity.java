@@ -26,8 +26,6 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.example.a10953.smallvideo.R;
 import com.example.a10953.smallvideo.common.utils.TCConstants;
-import com.example.a10953.smallvideo.videoupload.TXUGCPublish;
-import com.example.a10953.smallvideo.videoupload.TXUGCPublishTypeDef;
 import com.tencent.rtmp.ITXLivePlayListener;
 import com.tencent.rtmp.TXLiveConstants;
 import com.tencent.rtmp.TXLivePlayConfig;
@@ -158,7 +156,7 @@ public class TCVideoPreviewActivity extends Activity implements View.OnClickList
                 }
                 break;
             case R.id.video_publish:
-                publish();
+//                publish();
                 break;
             case R.id.record_to_edit:
                 startEditVideo();
@@ -190,39 +188,6 @@ public class TCVideoPreviewActivity extends Activity implements View.OnClickList
         }
     }
 
-//    private void publish() {
-//        stopPlay(false);
-//        Intent intent = new Intent(getApplicationContext(), TCVideoPublisherActivity.class);
-//        intent.putExtra(TCConstants.VIDEO_RECORD_TYPE, TCConstants.VIDEO_RECORD_TYPE_PLAY);
-//        intent.putExtra(TCConstants.VIDEO_RECORD_VIDEPATH,  mVideoPath);
-//        intent.putExtra(TCConstants.VIDEO_RECORD_COVERPATH, mCoverImagePath);
-//        startActivity(intent);
-//        finish();
-//    }
-
-    private void publish() {
-        stopPlay(false);
-        TXUGCPublish txugcPublish = new TXUGCPublish(this.getApplicationContext());
-        txugcPublish.setListener(new TXUGCPublishTypeDef.ITXVideoPublishListener() {
-            @Override
-            public void onPublishProgress(long uploadBytes, long totalBytes) {
-
-            }
-
-            @Override
-            public void onPublishComplete(TXUGCPublishTypeDef.TXPublishResult result) {
-
-            }
-        });
-
-        TXUGCPublishTypeDef.TXPublishParam param = new TXUGCPublishTypeDef.TXPublishParam();
-        // signature计算规则可参考 https://www.qcloud.com/document/product/266/9221
-        param.signature = "";
-        param.videoPath = mVideoPath;
-        param.coverPath = mCoverImagePath;
-        txugcPublish.publishVideo(param);
-        finish();
-    }
 
     private boolean startPlay() {
         mStartPreview.setBackgroundResource(R.drawable.icon_record_pause);

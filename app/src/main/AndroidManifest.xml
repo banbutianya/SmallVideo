@@ -36,7 +36,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".videorecord.ShowActivity" />
         <activity android:name=".videorecord.TCVideoSettingActivity" />
         <activity android:name=".videorecord.TCVideoRecordActivity" />
         <activity android:name=".common.activity.videoprevideo.TCVideoPreviewActivity"></activity>

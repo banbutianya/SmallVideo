@@ -30,7 +30,6 @@ import android.widget.Toast;
 import com.example.a10953.smallvideo.R;
 import com.example.a10953.smallvideo.common.activity.videoprevideo.TCVideoPreviewActivity;
 import com.example.a10953.smallvideo.common.utils.TCConstants;
-import com.example.a10953.smallvideo.common.widget.BeautySettingPannel;
 import com.example.a10953.smallvideo.shortvideo.view.RecordProgressView;
 import com.tencent.liteav.basic.log.TXCLog;
 import com.tencent.rtmp.TXLiveConstants;
@@ -59,8 +58,7 @@ public class TCVideoRecordActivity extends Activity implements View.OnClickListe
     private TXRecordCommon.TXRecordResult mTXRecordResult;
     private long mDuration; // 视频总时长
 
-    //美颜相关
-    private BeautySettingPannel.BeautyParams mBeautyParams = new BeautySettingPannel.BeautyParams();
+
     private TXCloudVideoView mVideoView;
     private ImageView mIvConfirm;
     private TextView mProgressTime;
@@ -69,8 +67,6 @@ public class TCVideoRecordActivity extends Activity implements View.OnClickListe
     private ComposeRecordBtn mComposeRecordBtn;
     private boolean mAspectSelectShow = false;
 
-    //美颜相关
-    private BeautySettingPannel mBeautyPannelView;
     private AudioManager mAudioManager;
     private AudioManager.OnAudioFocusChangeListener mOnAudioFocusListener;
     private boolean mPause = false;
@@ -196,17 +192,6 @@ public class TCVideoRecordActivity extends Activity implements View.OnClickListe
             mTXCameraRecord.startCameraCustomPreview(customConfig, mVideoView);
             mTXCameraRecord.setAspectRatio(mCurrentAspectRatio);
         }
-
-//        mTXCameraRecord.setBeautyDepth(mBeautyParams.mBeautyStyle, mBeautyParams.mBeautyLevel, mBeautyParams.mWhiteLevel, mBeautyParams.mRuddyLevel);
-//        mTXCameraRecord.setFaceScaleLevel(mBeautyParams.mFaceSlimLevel);
-//        mTXCameraRecord.setEyeScaleLevel(mBeautyParams.mBigEyeLevel);
-//        mTXCameraRecord.setFilter(mBeautyParams.mFilterBmp);
-//        mTXCameraRecord.setGreenScreenFile(mBeautyParams.mGreenFile, true);
-//        mTXCameraRecord.setMotionTmpl(mBeautyParams.mMotionTmplPath);
-//        mTXCameraRecord.setFaceShortLevel(mBeautyParams.mFaceShortLevel);
-//        mTXCameraRecord.setFaceVLevel(mBeautyParams.mFaceVLevel);
-//        mTXCameraRecord.setChinLevel(mBeautyParams.mChinSlimLevel);
-//        mTXCameraRecord.setNoseSlimLevel(mBeautyParams.mNoseScaleLevel);
     }
 
     private void initViews() {
@@ -217,13 +202,6 @@ public class TCVideoRecordActivity extends Activity implements View.OnClickListe
         mIvConfirm.setOnClickListener(this);
         mIvConfirm.setImageResource(R.drawable.ugc_confirm_disable);
         mIvConfirm.setEnabled(false);
-
-        //美颜相关
-//        mBeautyPannelView = (BeautySettingPannel) findViewById(R.id.beauty_pannel);
-//        mBeautyPannelView.setBeautyParamsChangeListener(this);
-//        mBeautyPannelView.disableExposure();
-
-
 
         mVideoView = (TXCloudVideoView) findViewById(R.id.video_view);
         mVideoView.enableHardwareDecode(true);
@@ -511,7 +489,7 @@ public class TCVideoRecordActivity extends Activity implements View.OnClickListe
         if (!outputFolder.exists()) {
             outputFolder.mkdir();
         }
-        String tempOutputPath = outputDir + File.separator + "TXUGC_" + time + ".mp4";
+        String tempOutputPath = outputDir + File.separator + "BLACK_CARD_" + time + ".mp4";
         return tempOutputPath;
     }
 
@@ -645,92 +623,6 @@ public class TCVideoRecordActivity extends Activity implements View.OnClickListe
 
     }
 
-    //美颜相关，需要实现一个借口，接口被我删除了
-//    @Override
-//    public void onBeautyParamsChange(BeautySettingPannel.BeautyParams params, int key) {
-//        switch (key) {
-//            case BeautySettingPannel.BEAUTYPARAM_BEAUTY:
-//                mBeautyParams.mBeautyLevel = params.mBeautyLevel;
-//                if (mTXCameraRecord != null) {
-//                    mTXCameraRecord.setBeautyDepth(mBeautyParams.mBeautyStyle, mBeautyParams.mBeautyLevel, mBeautyParams.mWhiteLevel, mBeautyParams.mRuddyLevel);
-//                }
-//                break;
-//            case BeautySettingPannel.BEAUTYPARAM_WHITE:
-//                mBeautyParams.mWhiteLevel = params.mWhiteLevel;
-//                if (mTXCameraRecord != null) {
-//                    mTXCameraRecord.setBeautyDepth(mBeautyParams.mBeautyStyle, mBeautyParams.mBeautyLevel, mBeautyParams.mWhiteLevel, mBeautyParams.mRuddyLevel);
-//                }
-//                break;
-//            case BeautySettingPannel.BEAUTYPARAM_FACE_LIFT:
-//                mBeautyParams.mFaceSlimLevel = params.mFaceSlimLevel;
-//                if (mTXCameraRecord != null) {
-//                    mTXCameraRecord.setFaceScaleLevel(params.mFaceSlimLevel);
-//                }
-//                break;
-//            case BeautySettingPannel.BEAUTYPARAM_BIG_EYE:
-//                mBeautyParams.mBigEyeLevel = params.mBigEyeLevel;
-//                if (mTXCameraRecord != null) {
-//                    mTXCameraRecord.setEyeScaleLevel(params.mBigEyeLevel);
-//                }
-//                break;
-//            case BeautySettingPannel.BEAUTYPARAM_FILTER:
-//                mBeautyParams.mFilterBmp = params.mFilterBmp;
-//                if (mTXCameraRecord != null) {
-//                    mTXCameraRecord.setFilter(params.mFilterBmp);
-//                }
-//                break;
-//            case BeautySettingPannel.BEAUTYPARAM_MOTION_TMPL:
-//                mBeautyParams.mMotionTmplPath = params.mMotionTmplPath;
-//                if (mTXCameraRecord != null) {
-//                    mTXCameraRecord.setMotionTmpl(params.mMotionTmplPath);
-//                }
-//                break;
-//            case BeautySettingPannel.BEAUTYPARAM_GREEN:
-//                mBeautyParams.mGreenFile = params.mGreenFile;
-//                if (mTXCameraRecord != null) {
-//                    mTXCameraRecord.setGreenScreenFile(params.mGreenFile, true);
-//                }
-//                break;
-//            case BeautySettingPannel.BEAUTYPARAM_RUDDY:
-//                mBeautyParams.mRuddyLevel = params.mRuddyLevel;
-//                if (mTXCameraRecord != null) {
-//                    mTXCameraRecord.setBeautyDepth(mBeautyParams.mBeautyStyle, mBeautyParams.mBeautyLevel, mBeautyParams.mWhiteLevel, mBeautyParams.mRuddyLevel);
-//                }
-//                break;
-//            case BeautySettingPannel.BEAUTYPARAM_BEAUTY_STYLE:
-//                if (mTXCameraRecord != null) {
-//                    mTXCameraRecord.setBeautyStyle(params.mBeautyStyle);
-//                }
-//                break;
-//            case BeautySettingPannel.BEAUTYPARAM_FACEV:
-//                if (mTXCameraRecord != null) {
-//                    mTXCameraRecord.setFaceVLevel(params.mFaceVLevel);
-//                }
-//                break;
-//            case BeautySettingPannel.BEAUTYPARAM_FACESHORT:
-//                if (mTXCameraRecord != null) {
-//                    mTXCameraRecord.setFaceShortLevel(params.mFaceShortLevel);
-//                }
-//                break;
-//            case BeautySettingPannel.BEAUTYPARAM_CHINSLIME:
-//                if (mTXCameraRecord != null) {
-//                    mTXCameraRecord.setChinLevel(params.mChinSlimLevel);
-//                }
-//                break;
-//            case BeautySettingPannel.BEAUTYPARAM_NOSESCALE:
-//                if (mTXCameraRecord != null) {
-//                    mTXCameraRecord.setNoseSlimLevel(params.mNoseScaleLevel);
-//                }
-//                break;
-//            case BeautySettingPannel.BEAUTYPARAM_FILTER_MIX_LEVEL:
-//                if (mTXCameraRecord != null) {
-//                    mTXCameraRecord.setSpecialRatio(params.mFilterMixLevel / 10.f);
-//                }
-//                break;
-//            default:
-//                break;
-//        }
-//    }
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
