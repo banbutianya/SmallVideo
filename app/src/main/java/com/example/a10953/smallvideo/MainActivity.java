@@ -6,9 +6,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
 
-import com.example.a10953.smallvideo.videorecord.TCVideoSettingActivity;
+import com.example.a10953.smallvideo.videorecord.TCVideoRecordActivity;
 import com.tencent.rtmp.TXLiveBase;
 
 
@@ -22,6 +21,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
 
         initViews();
+
 
         String sdkver = TXLiveBase.getSDKVersionStr();
         Log.e("liteavsdk", "liteav sdk version is : " + sdkver);
@@ -39,8 +39,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.camera_button:
-                Toast.makeText(this,"点击了按钮",Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(this, TCVideoSettingActivity.class);
+//                Toast.makeText(this,"点击了按钮",Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(this, TCVideoRecordActivity.class);
                 startActivity(intent);
                 break;
         }
