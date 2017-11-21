@@ -24,6 +24,7 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.example.a10953.smallvideo.MainActivity;
 import com.example.a10953.smallvideo.R;
 import com.example.a10953.smallvideo.common.utils.TCConstants;
 import com.tencent.rtmp.ITXLivePlayListener;
@@ -84,6 +85,8 @@ public class TCVideoPreviewActivity extends Activity implements View.OnClickList
 
         mVideoSource = getIntent().getIntExtra(TCConstants.VIDEO_RECORD_TYPE, TCConstants.VIDEO_RECORD_TYPE_EDIT);
         mVideoPath = getIntent().getStringExtra(TCConstants.VIDEO_RECORD_VIDEPATH);
+
+        //预览图路径
         mCoverImagePath = getIntent().getStringExtra(TCConstants.VIDEO_RECORD_COVERPATH);
         mVideoDuration = getIntent().getLongExtra(TCConstants.VIDEO_RECORD_DURATION, 0);
         mVideoResolution = getIntent().getIntExtra(TCConstants.VIDEO_RECORD_RESOLUTION, -1);
@@ -245,6 +248,10 @@ public class TCVideoPreviewActivity extends Activity implements View.OnClickList
             } catch (Exception e) {
                 e.printStackTrace();
             }
+            Intent i = new Intent(this, MainActivity.class);
+            i.putExtra(TCConstants.VIDEO_RECORD_VIDEPATH,mVideoPath);
+            i.putExtra(TCConstants.VIDEO_RECORD_COVERPATH,mCoverImagePath);
+            startActivity(i);
             finish();
         }
     }

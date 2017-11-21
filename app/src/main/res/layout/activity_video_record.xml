@@ -38,12 +38,35 @@
     </FrameLayout>
 
     <!--录制-->
+
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="41dp">
+
+        <LinearLayout
+            android:id="@+id/back_ll"
+            android:layout_width="36dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="20dp">
+
+            <ImageView
+                android:layout_width="14dp"
+                android:layout_height="23dp"
+                android:layout_gravity="center"
+                android:src="@drawable/selector_record_back"/>
+        </LinearLayout>
+
+    </FrameLayout>
+
     <RelativeLayout
         android:id="@+id/record_layout"
         android:layout_width="match_parent"
         android:layout_height="175dp"
+        android:background="#4D000000"
         android:layout_alignParentBottom="true"
-        android:background="#4D000000">
+        android:layout_alignParentStart="true">
 
         <com.example.a10953.smallvideo.shortvideo.view.RecordProgressView
             android:id="@+id/record_progress_view"
@@ -158,28 +181,6 @@
 
 
     </RelativeLayout>
-
-
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="41dp">
-
-        <LinearLayout
-            android:id="@+id/back_ll"
-            android:layout_width="36dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_marginLeft="20dp">
-
-            <ImageView
-                android:layout_width="14dp"
-                android:layout_height="23dp"
-                android:layout_gravity="center"
-                android:src="@drawable/selector_record_back"/>
-        </LinearLayout>
-
-    </FrameLayout>
-
 
 
 </RelativeLayout>

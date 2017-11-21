@@ -15,6 +15,26 @@
         android:id="@+id/camera_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="点击拍摄视频"/>
+        android:text="点击拍摄视频" />
+
+    <TextView
+        android:id="@+id/videopath"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/camera_button"/>
+
+    <TextView
+        android:id="@+id/imagepath"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/videopath"/>
+
+    <Button
+        android:id="@+id/upload"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="上传"
+        android:layout_below="@id/imagepath"/>
+
 
 </RelativeLayout>

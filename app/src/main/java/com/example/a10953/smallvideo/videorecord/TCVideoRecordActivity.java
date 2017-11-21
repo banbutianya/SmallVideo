@@ -47,7 +47,7 @@ import java.util.Locale;
 /**
  * UGC小视频录制界面
  */
-public class TCVideoRecordActivity extends Activity implements View.OnClickListener,  TXRecordCommon.ITXVideoRecordListener, View.OnTouchListener, GestureDetector.OnGestureListener, ScaleGestureDetector.OnScaleGestureListener {
+public class TCVideoRecordActivity extends Activity implements View.OnClickListener,  TXRecordCommon.ITXVideoRecordListener, View.OnTouchListener, GestureDetector.OnGestureListener, ScaleGestureDetector.OnScaleGestureListener{
 
     private static final String TAG = "TCVideoRecordActivity";
     private static final String OUTPUT_DIR_NAME = "TXUGC";
@@ -87,11 +87,6 @@ public class TCVideoRecordActivity extends Activity implements View.OnClickListe
     private int mMinDuration;
     private int mMaxDuration;
     private int mAspectRatio; // 视频比例
-    private int mRecordResolution; // 录制分辨率
-    private int mBiteRate; // 码率
-    private int mFps; // 帧率
-    private int mGop; // 关键帧间隔
-    private String mBGMPath;
     private String mBGMPlayingPath;
     private int mBGMDuration;
     private int mRecordSpeed = TXRecordCommon.RECORD_SPEED_NORMAL;
@@ -147,14 +142,9 @@ public class TCVideoRecordActivity extends Activity implements View.OnClickListe
             TXCLog.i(TAG, "mRecommendQuality = " + mRecommendQuality);
             return;
         }
-        // 自定义视频质量设置，用TXUGCCustomConfig
-//        mRecordResolution = intent.getIntExtra(TCVideoSettingActivity.RECORD_CONFIG_RESOLUTION, TXRecordCommon.VIDEO_RESOLUTION_540_960);
-//        mBiteRate = intent.getIntExtra(TCVideoSettingActivity.RECORD_CONFIG_BITE_RATE, 1800);
-//        mFps = intent.getIntExtra(TCVideoSettingActivity.RECORD_CONFIG_FPS, 20);
-//        mGop = intent.getIntExtra(TCVideoSettingActivity.RECORD_CONFIG_GOP, 3);
 
         TXCLog.d(TAG, "mMinDuration = " + mMinDuration + ", mMaxDuration = " + mMaxDuration + ", mAspectRatio = " + mAspectRatio +
-                ", mRecommendQuality = " + mRecommendQuality + ", mRecordResolution = " + mRecordResolution + ", mBiteRate = " + mBiteRate + ", mFps = " + mFps + ", mGop = " + mGop);
+                ", mRecommendQuality = " + mRecommendQuality + ", mRecordResolution = "  + ", mBiteRate = "  + ", mFps = "  + ", mGop = " );
     }
 
     private void startCameraPreview() {
@@ -177,24 +167,6 @@ public class TCVideoRecordActivity extends Activity implements View.OnClickListe
             }
             mTXCameraRecord.setRecordSpeed(mRecordSpeed);
             mTXCameraRecord.startCameraSimplePreview(simpleConfig, mVideoView);
-            mTXCameraRecord.setAspectRatio(mCurrentAspectRatio);
-        } else {
-            // 自定义配置
-            TXRecordCommon.TXUGCCustomConfig customConfig = new TXRecordCommon.TXUGCCustomConfig();
-            customConfig.videoResolution = mRecordResolution;
-            customConfig.minDuration = mMinDuration;
-            customConfig.maxDuration = mMaxDuration;
-            customConfig.videoBitrate = mBiteRate;
-            customConfig.videoGop = mGop;
-            customConfig.videoFps = mFps;
-            customConfig.isFront = mFront;
-            if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
-                customConfig.mHomeOriention = TXLiveConstants.VIDEO_ANGLE_HOME_DOWN;
-            } else {
-                customConfig.mHomeOriention = TXLiveConstants.VIDEO_ANGLE_HOME_RIGHT;
-            }
-            mTXCameraRecord.setRecordSpeed(mRecordSpeed);
-            mTXCameraRecord.startCameraCustomPreview(customConfig, mVideoView);
             mTXCameraRecord.setAspectRatio(mCurrentAspectRatio);
         }
     }
@@ -239,6 +211,7 @@ public class TCVideoRecordActivity extends Activity implements View.OnClickListe
 
         mComposeRecordBtn = (ComposeRecordBtn) findViewById(R.id.compose_record_btn);
         mRecordSpeed = TXRecordCommon.RECORD_SPEED_NORMAL;
+
 
     }
 
@@ -348,6 +321,7 @@ public class TCVideoRecordActivity extends Activity implements View.OnClickListe
     }
 
 
+
     private void toggleTorch() {
         if (mIsTorchOpen) {
             mTXCameraRecord.toggleTorch(false);
@@ -396,12 +370,15 @@ public class TCVideoRecordActivity extends Activity implements View.OnClickListe
                 if (mTXCameraRecord.getPartsManager().getPartsPathList().size() == 0) {
                     startRecord();
                 } else {
+                    //暂停以后，再继续，会调用这个函数
                     resumeRecord();
                 }
             } else {
+                //暂停的时候会调用这个函数
                 pauseRecord();
             }
         } else {
+            //第一次开始录制的时候会调用这个函数
             startRecord();
         }
         mLastClickTime = currentClickTime;
@@ -416,20 +393,21 @@ public class TCVideoRecordActivity extends Activity implements View.OnClickListe
         isSelected = false;
         if (mTXCameraRecord != null) {
             mTXCameraRecord.resumeRecord();
-            if (!TextUtils.isEmpty(mBGMPath)) {
-                if (mBGMPlayingPath == null || !mBGMPath.equals(mBGMPlayingPath)) {
-                    mTXCameraRecord.playBGMFromTime(0, mBGMDuration);
-                    mBGMPlayingPath = mBGMPath;
-                } else {
-                    mTXCameraRecord.resumeBGM();
-                }
-            }
+//            if (!TextUtils.isEmpty(mBGMPath)) {
+//                if (mBGMPlayingPath == null || !mBGMPath.equals(mBGMPlayingPath)) {
+//                    mTXCameraRecord.playBGMFromTime(0, mBGMDuration);
+//                    mBGMPlayingPath = mBGMPath;
+//                } else {
+//                    mTXCameraRecord.resumeBGM();
+//                }
+//            }
         }
         requestAudioFocus();
 
     }
 
     private void pauseRecord() {
+        //判断是否暂停，mPause为true的时候是暂停的
         mComposeRecordBtn.pauseRecord();
         mPause = true;
         mIvDeleteLastPart.setImageResource(R.drawable.selector_delete_last_part);
@@ -457,6 +435,7 @@ public class TCVideoRecordActivity extends Activity implements View.OnClickListe
     }
 
     private void startRecord() {
+        //变换按钮样式
         mComposeRecordBtn.startRecord();
         mIvDeleteLastPart.setImageResource(R.drawable.ugc_delete_last_part_disable);
         mIvDeleteLastPart.setEnabled(false);
@@ -473,12 +452,6 @@ public class TCVideoRecordActivity extends Activity implements View.OnClickListe
             mTXCameraRecord.setVideoRecordListener(null);
             mTXCameraRecord.stopRecord();
             return;
-        }
-        if (!TextUtils.isEmpty(mBGMPath)) {
-            mBGMDuration = mTXCameraRecord.setBGM(mBGMPath);
-            mTXCameraRecord.playBGMFromTime(0, mBGMDuration);
-            mBGMPlayingPath = mBGMPath;
-            TXCLog.i(TAG, "music duration = " + mTXCameraRecord.getMusicDuration(mBGMPath));
         }
 
         mRecording = true;
@@ -515,8 +488,6 @@ public class TCVideoRecordActivity extends Activity implements View.OnClickListe
                 intent.putExtra(TCConstants.VIDEO_RECORD_RESOLUTION, TXRecordCommon.VIDEO_RESOLUTION_540_960);
             } else if (mRecommendQuality == TXRecordCommon.VIDEO_QUALITY_HIGH) {
                 intent.putExtra(TCConstants.VIDEO_RECORD_RESOLUTION, TXRecordCommon.VIDEO_RESOLUTION_720_1280);
-            } else {
-                intent.putExtra(TCConstants.VIDEO_RECORD_RESOLUTION, mRecordResolution);
             }
             startActivity(intent);
             finish();
@@ -763,4 +734,6 @@ public class TCVideoRecordActivity extends Activity implements View.OnClickListe
     public void onBackPressed() {
         back();
     }
+
+
 }
