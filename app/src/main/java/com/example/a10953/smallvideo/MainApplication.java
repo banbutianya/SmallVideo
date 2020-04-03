@@ -19,8 +19,8 @@ public class MainApplication extends Application{
     //设置OSS数据中心域名或者cname域名
     public static final String OSS_BUCKET_HOST_ID = "oss-cn-beijing.aliyuncs.com";
     //Key
-    private static final String accessKey = "LTAIuHdXXz6KVXZK";
-    private static final String screctKey = "B3NHAMXz09723UyyDOpyzXb2XMS4n2";
+    private static final String accessKey = "****";
+    private static final String screctKey = "*****";
 
     public static OSS oss;
     @Override
